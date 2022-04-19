@@ -26,7 +26,7 @@ public class TestAlerts extends BaseClass {
 
 		// to enter data as required by the alert
 		System.out.println("Entering date in the alert input box");
-		driver.switchTo().alert().sendKeys("Lambdatest");
+		driver.switchTo().alert().sendKeys("LambdaTest");
 
 		// to accept the alert
 		System.out.println("Accepting the alert");
