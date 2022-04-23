@@ -5,6 +5,8 @@ import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -43,16 +45,18 @@ public class TestPopups extends BaseClass {
 
 		}
 
-		Thread.sleep(2500);
+		WebDriverWait wait = new WebDriverWait(driver,30);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[(text()='Follow')]")));
+		
 		// to verify that driver focus is shifted to popup window
 		System.out.println("Asserting some element on the new popup window to confirm switch");
 		WebElement twitterFollowButton = driver.findElement(By.xpath("//span[(text()='Follow')]"));
 		Assert.assertTrue(twitterFollowButton.isDisplayed(), "Verify twitter follow button is displayed");
 
-		Thread.sleep(1000);
 		// shift driver back to main window and verify
 		System.out.println("Switching back to main window and asserting same");
 		driver.switchTo().window(mainWindowHandle);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(@title,'Twitter')]")));
 		Assert.assertTrue(followButtonOnMainWindow.isDisplayed(), "Verify focus is shifted to main window");
 
 	}
