@@ -2,6 +2,8 @@ package test;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -17,8 +19,9 @@ public class TestModalDialogBox extends BaseClass {
 		System.out.println("Clicking launch modal button");
 		driver.findElement(By.xpath("//button[@data-target='#myModal']")).click();
 
-		// to let the modal box be visible
-		Thread.sleep(2000);
+		// wait to let the modal box be visible
+		WebDriverWait wait = new WebDriverWait(driver,30);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("modal-dialog")));
 
 		// to fetch the web element of the modal container
 		System.out.println("Fetching the web element for modal container");
