@@ -2,38 +2,32 @@ package test;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class TestAlerts extends BaseClass {
-
+public class TestAlerts extends BaseTest
+{
 	@Test(description = "test to verify alerts")
-	public void verifyAlerts() throws InterruptedException {
-		// to navigate to the website
+	public void verifyAlerts() throws InterruptedException 
+	{
+		//navigate to the website
 		System.out.println("Navigating to the website");
 		driver.get("https://www.lambdatest.com/selenium-playground/javascript-alert-box-demo");
 
-		// to click the button to get demo alert
-		System.out.println("Clicking launch alert button");
-		driver.findElement(By.xpath("(//button[contains(text(),'Click Me')])[3]")).click();
+		//click the button to get demo alert
+		System.out.println("Clicking alert button");
+		driver.findElement(By.xpath("(//button[contains(text(),'Click Me')])[1]")).click();
 
-		// wait to let the alert be visible
-		WebDriverWait wait = new WebDriverWait(driver,30);
+		//wait for the alert be visible
 		wait.until(ExpectedConditions.alertIsPresent());
 
-		// to fetch the alert body content and verify it
+		//fetch the alert body content and assert it
 		System.out.println("Fetching the alert body content and asserting it");
 		String alertBodyText = driver.switchTo().alert().getText();
-		Assert.assertEquals(alertBodyText, "Please enter your name", "Verify alert body content");
+		Assert.assertEquals(alertBodyText, "I am an alert box!", "Verify alert body content");
 
-		// to enter data as required by the alert
-		System.out.println("Entering date in the alert input box");
-		driver.switchTo().alert().sendKeys("Lambdatest");
-
-		// to accept the alert
+		//accept the alert
 		System.out.println("Accepting the alert");
 		driver.switchTo().alert().accept();
-
 	}
 }
